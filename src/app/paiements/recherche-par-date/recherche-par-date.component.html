@@ -24,7 +24,7 @@
                     </div>
                  
                  
-                             <div class="col-md-4" ></div>
+                            
 
                     <div class="col-md-4" >
                         <legend>Choisir la date</legend>
@@ -34,9 +34,14 @@
                         <mat-datepicker #picker2 startView="year"></mat-datepicker>
                         </mat-form-field>
                     </div>
-                    
+                    <div class="col-md-2" style=" float: right;" >
+                      <h1></h1>
+                      
+                      <button mat-raised-button class="btn btn-raised  btn-info" style=" margin-top: 25px" (click)="getlistepaiement()">rechercher</button>
+                    </div>
                  </div>
-                 <button mat-raised-button class="btn btn-raised  btn-info" style="float:rigth" (click)="getlistepaiement()">rechercher</button>
+
+                
                  </div>
                  
 
@@ -44,9 +49,12 @@
                     <div class="card-body">
                         <br>
                         <div class="row">
-                            
+                          <label class="col-md-5"></label>
+                           <label class="col-md-4" style="float:right;"><h4 >Etat de paiement </h4></label>
                             <table class="table" *ngIf ="datefin">
+                              
                               <thead>
+                               
                                 <th>mois</th>
                                 <th>Annee</th>
                                 <th>datePaiment</th>
