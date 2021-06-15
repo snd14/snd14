@@ -1,0 +1,194 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12" *ngIf ="!paiement.id" >
+          <div class="card ">
+            <div class="card-header card-header-rose card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">contacts</i>
+              </div>
+              <h4 class="card-title">Paiement axiliaires  </h4>
+            </div>
+            <div class="card-body ">
+              <form class="form-horizontal">  
+                <div class="row">
+                  <label class="col-md-2 col-2 col-form-label">Mois</label>
+                  <div class="col-md-4 col-9">
+                    <mat-form-field class="example-full-width">
+                      <input matInput type="number" id="mois" name="mois" [(ngModel)]="paiement.mois" >
+                    </mat-form-field>
+                  </div>
+                  <label class="col-md-2 col-2 col-form-label">Année</label>
+                  <div class="col-md-4 col-9">
+                    <mat-form-field class="example-full-width">
+                      <input matInput type="number" id="annee" name="annee" [(ngModel)]="paiement.annee" >
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  
+                  <table class="table">
+                    <thead>
+                      <th>nom</th>
+                      <th>prenom</th>
+                      <th>libelle</th>
+                      
+                      <th>Montant_Ht</th>
+                      <th>Montant_ttc</th>
+                      <th>netAPayer</th>
+                      <th>Remise</th>
+                      <th>Tva</th>
+                     
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of facteurs ;let i=index">
+                    <td>{{item.nom}}</td>
+                    <td>{{item.prenom}}</td>
+                    <td>{{item.parametreFacteur.libelle}}</td>
+                    <td>{{item.parametreFacteur.montantHt}}</td>
+                    <td>{{item.parametreFacteur.montantTtc}}</td>
+                    <td>{{item.parametreFacteur.netAPayer}}</td>
+                    <td>{{item.parametreFacteur.remise}}</td>
+                    <td>{{item.parametreFacteur.tva}}</td>
+                    
+                    
+                    
+                   
+                    
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                       <tr>
+                        <td colspan="5"></td><td>Nbre Facteurs</td><td>{{paiement.facteurs.length}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>Total TTC</td><td>{{montantTtc}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>TotalmontantHt</td><td>{{montantHt}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>Total net</td><td>{{netApayer}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>TotalTva</td><td>{{tva}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>Totalremise</td><td>{{remise}}</td>
+                       </tr>
+                     </tfoot>  
+                  </table>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer ">
+              <div class="row">
+                <div class="col-md-9">
+                  <button mat-raised-button type="submit" class="btn btn-fill btn-success"(click)="savePaiement()">Valider</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+        <div class="col-md-12" *ngIf ="paiement.id" >
+          <div class="card ">
+            <div class="card-header card-header-rose card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">contacts</i>
+              </div>
+              <h4 class="card-title">Paiement axiliaires  </h4>
+            </div>
+            <div class="card-body ">
+              <form class="form-horizontal">
+                <div class="row">
+                  <label class="col-md-2 col-2 col-form-label">Mois</label>
+                  <div class="col-md-4 col-9">
+                    <mat-form-field class="example-full-width">
+                      <input matInput type="number" id="mois" name="mois" [(ngModel)]="paiement.mois" >
+                    </mat-form-field>
+                  </div>
+                  <label class="col-md-2 col-2 col-form-label">Année</label>
+                  <div class="col-md-4 col-9">
+                    <mat-form-field class="example-full-width">
+                      <input matInput type="number" id="annee" name="annee" [(ngModel)]="paiement.annee" >
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  
+                  <table class="table">
+                    <thead>
+                      <th>nom</th>
+                      <th>prenom</th>
+                      <th>libelle</th>
+                      
+                      <th>Montant_Ht</th>
+                      <th>Montant_ttc</th>
+                      <th>netAPayer</th>
+                      <th>Remise</th>
+                      <th>Tva</th>
+                     
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of paiement.paiements ;let i=index">
+                    <td>{{item.facteur.nom}}</td>
+                    <td>{{item.facteur.prenom}}</td>
+                    <td>{{item.facteur.parametreFacteur.libelle}}</td>
+                    <td>{{item.facteur.parametreFacteur.montantHt}}</td>
+                    <td>{{item.facteur.parametreFacteur.montantTtc}}</td>
+                    <td>{{item.facteur.parametreFacteur.netAPayer}}</td>
+                    <td>{{item.facteur.parametreFacteur.remise}}</td>    
+                    <td>{{item.facteur.parametreFacteur.tva}}</td>
+                    
+                    
+                    
+                   
+                    
+                    </tr>
+                    </tbody>
+                    <tfoot >
+                      <tr>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                      </tr> 
+                       <tr >
+                        <td colspan="5"></td><td>Nbre Facteurs</td><td>{{paiement.paiements.length}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>Total TTC</td><td>{{montantTtc}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>TotalmontantHt</td><td>{{montantHt}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>Total net</td><td>{{netApayer}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>TotalTva</td><td>{{tva}}</td>
+                       </tr>
+                       <tr>
+                        <td colspan="5"></td><td>Totalremise</td><td>{{remise}}</td>
+                       </tr>
+                     </tfoot>  
+                  </table>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer ">
+              <div class="row">
+                <div class="col-md-9">
+                  <button mat-raised-button type="submit" class="btn btn-fill btn-success"onclick="window.print()">imprimer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        
+        </div>
+      </div>
+    </div>
+  </div>

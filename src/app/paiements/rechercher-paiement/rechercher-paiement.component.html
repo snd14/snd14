@@ -1,0 +1,43 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card ">
+            <div class="card-header card-header-info card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">search</i>
+              </div>
+              <h4 class="card-title">Rechercher paiement</h4>
+            </div>
+            <div class="card-body ">
+              <form #searchForm="ngForm" action="#">
+                <mat-form-field>
+                  <mat-select placeholder="Mois" name="mois" [(ngModel)]="rechMoi">
+                      <mat-option *ngFor="let m of listMois" [value]="m.id">
+                          {{ m.libelle }}
+                      </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Année" name="annee" [(ngModel)]="rechAnne">
+                    <mat-option *ngFor="let a of listAnnee " [value]="a.value" >
+                        {{ a.viewValue }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+                
+              </form>
+            </div>
+            
+            <!--[disabled]="!searchForm.form.invalid"-->
+            <div class="card-footer" > 
+              <button mat-raised-button  type="submit" (click)="rechercherPaiement()" 
+               class="btn btn-fill btn-success" >Rechercher</button>
+            </div>
+       
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+  
