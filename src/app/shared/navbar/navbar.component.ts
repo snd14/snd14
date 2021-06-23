@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular
 import { Subscription } from 'rxjs/Subscription';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {KeycloakService} from 'keycloak-angular';
+import { HttpClient } from '@angular/common/http';
 const misc: any = {
     navbar_menu_visible: 0,
     active_collapse: true,
@@ -30,7 +31,7 @@ export class NavbarComponent implements OnInit {
     email ;
     username;
 
-    constructor( private keycloak : KeycloakService , location: Location, private renderer: Renderer2, private element: ElementRef, private router: Router,) {
+    constructor( private keycloak : KeycloakService , location: Location, private renderer: Renderer2, private element: ElementRef, private router: Router,private http:HttpClient) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -38,7 +39,7 @@ export class NavbarComponent implements OnInit {
         this.keycloak.loadUserProfile(true).then(res =>{
 
             // this.email=res.email
-            this.username=res.username
+            this.username=res.email
 
         });
 
@@ -106,6 +107,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        //this.http.get("http://10.10.1.126:9999/dg_User").subscribe((data)=>[console.log(data)])
         this.listTitles = ROUTES.filter(listTitle => listTitle);
 
         const navbar: HTMLElement = this.element.nativeElement;

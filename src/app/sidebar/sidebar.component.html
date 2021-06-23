@@ -68,63 +68,373 @@
                     </p>
                   </a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="material-icons">notifications</i>
-                    <span class="notification">5</span>
-                    <p>
-                      <span class="d-lg-none d-md-block">Some Actions</span>
-                    </p>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                    <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                    <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                    <a class="dropdown-item" href="#">Another Notification</a>
-                    <a class="dropdown-item" href="#">Another One</a>
-                  </div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#pablo">
-                    <i class="material-icons">person</i>
-                    <p>
-                      <span class="d-lg-none d-md-block">Account</span>
-                    </p>
-                  </a>
-                </li>
+                
+                
               </ul>
             </div>
             <ul class="nav">
-                <li routerLinkActive="active" *ngFor="let menuitem of menuItems" class="nav-item">
-                    <!--If is a single link-->
-                    <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'" class="nav-link">
-                        <i class="material-icons">{{menuitem.icontype}}</i>
-                        <p>{{menuitem.title}}</p>
+              <li routerLinkActive="active" class="nav-item">
+                  <!--If is a single link-->
+                  <a [routerLink]="[menuItems[0].path]" *ngIf="menuItems[0].type === 'link'" class="nav-link">
+                      <i class="material-icons">{{menuItems[0].icontype}}</i>
+                      <p>{{menuItems[0].title}}</p>
+                  </a>
+                  <!--If it have a submenu-->
+      
+                  <a data-toggle="collapse" href="#{{menuItems[0].collapse}}" *ngIf="menuItems[0].type === 'sub'"
+                      (click)="updatePS()" class="nav-link">
+      
+                      <i class="material-icons">{{menuItems[0].icontype}}</i>
+                      <p>{{menuItems[0].title}}<b class="caret"></b></p>
+                  </a>
+      
+                  <!--Display the submenu items-->
+                  <div id="{{menuItems[0].collapse}}" class="collapse" *ngIf="menuItems[0].type === 'sub'">
+                      <ul class="nav">
+                          <li routerLinkActive="active" *ngFor="let childitem of menuItems[0].children" class="nav-item">
+                              <a [routerLink]="[menuItems[0].path, childitem.path]" class="nav-link">
+      
+                                  <span class="sidebar-mini">{{childitem.ab}}</span>
+                                  <span class="sidebar-normal">{{childitem.title}}</span>
+      
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+      
+          </ul>
+        
+            <ul class="nav" *ngIf="isDcp() || isReceveur()">
+                <li routerLinkActive="active" class="nav-item">
+                  
+                    <a [routerLink]="[menuItems[1].path]" *ngIf="menuItems[1].type === 'link'" class="nav-link">
+                        <i class="material-icons">{{menuItems[1].icontype}}</i>
+                        <p>{{menuItems[1].title}}</p>
                     </a>
-                    <!--If it have a submenu-->
-                    <a data-toggle="collapse" href="#{{menuitem.collapse}}" *ngIf="menuitem.type === 'sub'" (click)="updatePS()" class="nav-link">
-                        <i class="material-icons">{{menuitem.icontype}}</i>
-                        <p>{{menuitem.title}}<b class="caret"></b></p>
+                    
+        
+                    <a data-toggle="collapse" href="#{{menuItems[1].collapse}}" *ngIf="menuItems[1].type === 'sub'"
+                        (click)="updatePS()" class="nav-link">
+        
+                        <i class="material-icons">{{menuItems[1].icontype}}</i>
+                        <p>{{menuItems[1].title}}<b class="caret"></b></p>
                     </a>
-
-                    <!--Display the submenu items-->
-                    <div id="{{menuitem.collapse}}" class="collapse" *ngIf="menuitem.type === 'sub'">
+        
+                    
+                    <div id="{{menuItems[1].collapse}}" class="collapse" *ngIf="menuItems[1].type === 'sub'">
                         <ul class="nav">
-                            <li routerLinkActive="active" *ngFor="let childitem of menuitem.children" class="nav-item">
-                                <a [routerLink]="[menuitem.path, childitem.path]" class="nav-link">
+                            <li routerLinkActive="active" *ngFor="let childitem of menuItems[1].children" class="nav-item">
+                                <a [routerLink]="[menuItems[1].path, childitem.path]" class="nav-link">
+        
                                     <span class="sidebar-mini">{{childitem.ab}}</span>
                                     <span class="sidebar-normal">{{childitem.title}}</span>
+        
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a href="http://md-pro-angular.creative-tim.com/documentation/tutorial?ref=md-pro-archive" class="nav-link">
-                        <i class="material-icons">school</i>
-                        <p>Documentation</p>
-                    </a>
-                </li>
+        
             </ul>
+            <!--facteur-->
+            
+            <ul class="nav" *ngIf="isDcp() || isReceveur()">
+                <li routerLinkActive="active" class="nav-item">
+                  
+                    <a [routerLink]="[menuItems[2].path]" *ngIf="menuItems[2].type === 'link'" class="nav-link">
+                        <i class="material-icons">{{menuItems[2].icontype}}</i>
+                        <p>{{menuItems[2].title}}</p>
+                    </a>
+                    
+        
+                    <a data-toggle="collapse" href="#{{menuItems[2].collapse}}" *ngIf="menuItems[2].type === 'sub'"
+                        (click)="updatePS()" class="nav-link">
+        
+                        <i class="material-icons">{{menuItems[2].icontype}}</i>
+                        <p>{{menuItems[2].title}}<b class="caret"></b></p>
+                    </a>
+        
+                    
+                    <div id="{{menuItems[2].collapse}}" class="collapse" *ngIf="menuItems[2].type === 'sub'">
+                        <ul class="nav">
+                            <li routerLinkActive="active" *ngFor="let childitem of menuItems[2].children" class="nav-item">
+                                <a [routerLink]="[menuItems[2].path, childitem.path]" class="nav-link">
+        
+                                    <span class="sidebar-mini">{{childitem.ab}}</span>
+                                    <span class="sidebar-normal">{{childitem.title}}</span>
+        
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+        
+            </ul>
+            <!--fin facteur-->
+            <!--parametre-->
+            
+            <ul class="nav" *ngIf="isDcp()">
+                <li routerLinkActive="active" class="nav-item">
+                  
+                    <a [routerLink]="[menuItems[3].path]" *ngIf="menuItems[3].type === 'link'" class="nav-link">
+                        <i class="material-icons">{{menuItems[3].icontype}}</i>
+                        <p>{{menuItems[3].title}}</p>
+                    </a>
+                    
+        
+                    <a data-toggle="collapse" href="#{{menuItems[3].collapse}}" *ngIf="menuItems[3].type === 'sub'"
+                        (click)="updatePS()" class="nav-link">
+        
+                        <i class="material-icons">{{menuItems[3].icontype}}</i>
+                        <p>{{menuItems[3].title}}<b class="caret"></b></p>
+                    </a>
+        
+                    
+                    <div id="{{menuItems[3].collapse}}" class="collapse" *ngIf="menuItems[3].type === 'sub'">
+                        <ul class="nav">
+                            <li routerLinkActive="active" *ngFor="let childitem of menuItems[3].children" class="nav-item">
+                                <a [routerLink]="[menuItems[3].path, childitem.path]" class="nav-link">
+        
+                                    <span class="sidebar-mini">{{childitem.ab}}</span>
+                                    <span class="sidebar-normal">{{childitem.title}}</span>
+        
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+        
+            </ul>
+            <!--fin param-->
+            <!--rapport-->
+            <ul class="nav" >
+                <li routerLinkActive="active" class="nav-item">
+                    
+                    <a [routerLink]="[menuItems[4].path]" *ngIf="menuItems[4].type === 'link'" class="nav-link">
+                        <i class="material-icons">{{menuItems[4].icontype}}</i>
+                        <p>{{menuItems[4].title}}</p>
+                    </a>
+                    
+        
+                    <a data-toggle="collapse" href="#{{menuItems[4].collapse}}" *ngIf="menuItems[4].type === 'sub'"
+                        (click)="updatePS()" class="nav-link">
+        
+                        <i class="material-icons">{{menuItems[4].icontype}}</i>
+                        <p>{{menuItems[4].title}}<b class="caret"></b></p>
+                    </a>
+        
+                    
+                    <div id="{{menuItems[4].collapse}}" class="collapse" *ngIf="menuItems[4].type === 'sub'">
+                        
+                        <ul class="nav" *ngIf="isDcp() || isReceveur()">
+                            <li routerLinkActive="active" class="nav-item">
+                                <a [routerLink]="[menuItems[4].path, menuItems[4].children[0].path]" class="nav-link">
+        
+                                    <span class="sidebar-mini">{{menuItems[4].children[0].ab}}</span>
+                                    <span class="sidebar-normal">{{menuItems[4].children[0].title}}</span>
+        
+                                </a>
+                            </li>
+                        </ul>
+        
+                      
+                       <ul class="nav" *ngIf="isDcp() || isDrp()">
+                            <li routerLinkActive="active" class="nav-item">
+                                <a [routerLink]="[menuItems[4].path, menuItems[4].children[1].path]" class="nav-link">
+        
+        
+                                    <span class="sidebar-mini">{{menuItems[4].children[1].ab}}</span>
+                                    <span class="sidebar-normal">{{menuItems[4].children[1].title}}</span>
+        
+                                </a>
+                            </li>
+                        </ul>
+                       
+               
+        
+                        
+                         
+                    </div>
+                </li>
+                </ul>
+            <!--fin erapport-->
+<!--       
+          <ul class="nav">
+              <li routerLinkActive="active" class="nav-item">
+                
+                  <a [routerLink]="[menuItems[1].path]" *ngIf="menuItems[1].type === 'link'" class="nav-link">
+                      <i class="material-icons">{{menuItems[1].icontype}}</i>
+                      <p>{{menuItems[1].title}}</p>
+                  </a>
+                  
+      
+                  <a data-toggle="collapse" href="#{{menuItems[1].collapse}}" *ngIf="menuItems[1].type === 'sub'"
+                      (click)="updatePS()" class="nav-link">
+      
+                      <i class="material-icons">{{menuItems[1].icontype}}</i>
+                      <p>{{menuItems[1].title}}<b class="caret"></b></p>
+                  </a>
+      
+                  
+                  <div id="{{menuItems[1].collapse}}" class="collapse" *ngIf="menuItems[1].type === 'sub'">
+                      <ul class="nav">
+                          <li routerLinkActive="active" *ngFor="let childitem of menuItems[1].children" class="nav-item">
+                              <a [routerLink]="[menuItems[1].path, childitem.path]" class="nav-link">
+      
+                                  <span class="sidebar-mini">{{childitem.ab}}</span>
+                                  <span class="sidebar-normal">{{childitem.title}}</span>
+      
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+      
+          </ul>
+      
+          
+      
+          <ul class="nav" >
+              <li routerLinkActive="active" class="nav-item">
+                  
+                  <a [routerLink]="[menuItems[2].path]" *ngIf="menuItems[2].type === 'link'" class="nav-link">
+                      <i class="material-icons">{{menuItems[2].icontype}}</i>
+                      <p>{{menuItems[2].title}}</p>
+                  </a>
+                  
+      
+                  <a data-toggle="collapse" href="#{{menuItems[2].collapse}}" *ngIf="menuItems[2].type === 'sub'"
+                      (click)="updatePS()" class="nav-link">
+      
+                      <i class="material-icons">{{menuItems[2].icontype}}</i>
+                      <p>{{menuItems[2].title}}<b class="caret"></b></p>
+                  </a>
+      
+                  
+                  <div id="{{menuItems[2].collapse}}" class="collapse" *ngIf="menuItems[2].type === 'sub'">
+                      
+                      <ul class="nav">
+                          <li routerLinkActive="active" class="nav-item">
+                              <a [routerLink]="[menuItems[2].path, menuItems[2].children[0].path]" class="nav-link">
+      
+                                  <span class="sidebar-mini">{{menuItems[2].children[0].ab}}</span>
+                                  <span class="sidebar-normal">{{menuItems[2].children[0].title}}</span>
+      
+                              </a>
+                          </li>
+                      </ul>
+      
+                    
+                     <ul class="nav" *ngIf="isDcp()">
+                          <li routerLinkActive="active" class="nav-item">
+                              <a [routerLink]="[menuItems[2].path, menuItems[2].children[1].path]" class="nav-link">
+      
+      
+                                  <span class="sidebar-mini">{{menuItems[2].children[1].ab}}</span>
+                                  <span class="sidebar-normal">{{menuItems[2].children[1].title}}</span>
+      
+                              </a>
+                          </li>
+                      </ul>
+                     
+             
+      
+                      
+                       <ul class="nav" *ngIf="isDrp()">
+                          <li routerLinkActive="active" class="nav-item">
+                             <a [routerLink]="[menuItems[1].path, menuItems[1].children[1].path]" class="nav-link">
+      
+      
+                              <span class="sidebar-mini">{{menuItems[1].children[1].ab}}</span>
+                              <span class="sidebar-normal">{{menuItems[1].children[1].title}}</span>
+  
+                          </a> 
 
-        </div>
+                             <a [routerLink]="[menuItems[2].path, menuItems[2].children[2].path]" class="nav-link">
+      
+      
+                                  <span class="sidebar-mini">{{menuItems[2].children[2].ab}}</span>
+                                  <span class="sidebar-normal">{{menuItems[2].children[2].title}}</span>
+      
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+              </ul> 
+
+               
+                          
+          <ul class="nav">
+            <li routerLinkActive="active" class="nav-item">
+            
+                <a [routerLink]="[menuItems[3].path]" *ngIf="menuItems[3].type === 'link'" class="nav-link">
+                    <i class="material-icons">{{menuItems[3].icontype}}</i>
+                    <p>{{menuItems[3].title}}</p>
+                </a>
+        
+    
+                <a data-toggle="collapse" href="#{{menuItems[3].collapse}}" *ngIf="menuItems[3].type === 'sub'"
+                    (click)="updatePS()" class="nav-link">
+    
+                    <i class="material-icons">{{menuItems[3].icontype}}</i>
+                    <p>{{menuItems[3].title}}<b class="caret"></b></p>
+                </a>
+    
+                
+                <div id="{{menuItems[3].collapse}}" class="collapse" *ngIf="menuItems[3].type === 'sub'">
+                    <ul class="nav">
+                        <li routerLinkActive="active" *ngFor="let childitem of menuItems[3].children" class="nav-item">
+                            <a [routerLink]="[menuItems[3].path, childitem.path]" class="nav-link">
+    
+                                <span class="sidebar-mini">{{childitem.ab}}</span>
+                                <span class="sidebar-normal">{{childitem.title}}</span>
+    
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+    
+        </ul>
+
+                      
+
+                        
+                
+          <ul class="nav">
+            <li routerLinkActive="active" class="nav-item">
+                
+                <a [routerLink]="[menuItems[4].path]" *ngIf="menuItems[4].type === 'link'" class="nav-link">
+                    <i class="material-icons">{{menuItems[4].icontype}}</i>
+                    <p>{{menuItems[4].title}}</p>
+                </a>
+    
+    
+                <a data-toggle="collapse" href="#{{menuItems[4].collapse}}" *ngIf="menuItems[4].type === 'sub'"
+                    (click)="updatePS()" class="nav-link">
+    
+                    <i class="material-icons">{{menuItems[4].icontype}}</i>
+                    <p>{{menuItems[4].title}}<b class="caret"></b></p>
+                </a>
+    
+                
+                <div id="{{menuItems[4].collapse}}" class="collapse" *ngIf="menuItems[4].type === 'sub'">
+                    <ul class="nav">
+                        <li routerLinkActive="active" *ngFor="let childitem of menuItems[4].children" class="nav-item">
+                            <a [routerLink]="[menuItems[4].path, childitem.path]" class="nav-link">
+    
+                                <span class="sidebar-mini">{{childitem.ab}}</span>
+                                <span class="sidebar-normal">{{childitem.title}}</span>
+    
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+    
+        </ul>
+                
+
+        </div> -->

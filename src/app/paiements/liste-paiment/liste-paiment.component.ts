@@ -20,7 +20,7 @@ export class ListePaimentComponent implements OnInit {
     this.date2=this.route.snapshot.params['date2'] ;
 
     this.getlistepaiement();
-    //debugger
+    
   }
   getlistepaiement(){
     console.log(this.date1, this.date2);

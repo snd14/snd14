@@ -11,10 +11,10 @@
               <div class="card-icon">
                 <i class="material-icons">assignment</i>
               </div>
-              <h4 class="card-title">Table des parametres
+              <h4 class="card-title">Table de parametrage
                 <button mat-raised-button class="btn btn-raised  btn-info" style="float:right" data-toggle="modal"
                   data-target="#noticeModal">
-                  ajouter parametre
+                  ajouter de typeFacteur
                 </button>
               </h4>
             </div>
@@ -28,7 +28,7 @@
   
                     <tr>
                       <th class="text-center"><b>Id</b> </th>
-                      <th class="text-center"><b>libelle</b></th>
+                      <th class="text-center"><b>typeFacteur</b></th>
                       <th class="text-center"><b>montantHt</b></th>
                       <th class="text-center"><b>montantTtc</b></th>
                       <th class="text-center"><b>netAPayer</b></th>
@@ -50,7 +50,7 @@
                       <td class="td-actions text-right">
                         <button mat-raised-button type="button" class="btn btn-info ">
                           <i class="material-icons" data-toggle="modal" data-target="#myModal"
-                            (click)="getParametrebyId(parame.id)">edit</i>
+                            (click)="getParametrebyId(parame)">edit</i>
                         </button>
   
                         <button mat-raised-button type="button" class="btn btn-danger ">
@@ -62,32 +62,32 @@
                   <button mat-raised-button class="btn btn-raised  btn-info" style="float:right" (click)="upload()">telecharger</button>
                 </table>
   
-                <!--modification de facteur-->
+                <!--modification du parametrage-->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                   aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title">Modification de parametre</h4>
+                        <h4 class="modal-title">Modification du parametrage</h4>
                         <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                           <i class="material-icons">clear</i>
                         </button>
                       </div>
-                      <div class="modal-body">
+                      <div class="modal-body" *ngIf="params">
   
   
-                        <form #userForme="ngForm">
+                        <form #userForme="ngForm" >
                           <div class="row">
                             <div class="col-md-12">
                               <mat-form-field class="example-full-width">
   
-                                <input matInput type="number" placeholder="numContrat" id="numero" name="numero" disabled
-                                  [(ngModel)]="params.id">
+                                <input matInput type="number" placeholder="numContrat" id="numero" name="numero" 
+                                  [(ngModel)]="params.id" disabled>
                               </mat-form-field>
                             </div>
                             <div class="col-md-12">
                               <mat-form-field class="example-full-width">
-                                <input matInput type="text" placeholder="libelle" [(ngModel)]="params.libelle"
+                                <input matInput type="text" placeholder="typeFacteur" [(ngModel)]="params.libelle"
                                   id="libelle" name="libelle">
                               </mat-form-field>
                             </div>
@@ -98,7 +98,7 @@
                                 <input matInput type="text" placeholder="montantHt" [(ngModel)]="params.montantHt"
                                   id="montantHt" name="montantHt">
                               </mat-form-field>
-                            </div>
+                            </div> 
                           </div>
   
   
@@ -169,13 +169,13 @@
   
   
         </div>
-        <!-- ajout de parametre -->
+        <!-- ajout -->
         <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
           aria-hidden="true">
           <div class="modal-dialog modal-notice">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Ajout parametre?</h5>
+                <h5 class="modal-title" id="myModalLabel">Ajout de type facteur?</h5>
                 <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                   <i class="material-icons">close</i>
                 </button>
@@ -187,7 +187,7 @@
                   
                   <form [formGroup]="parametreForm" >
                     <div class="form-group">
-                      <label for="libelle">libelle</label>
+                      <label for="libelle">typeFacteur</label>
                       <input type="text" id="libelle"
                              class="form-control" formControlName="libelle">
                     </div>

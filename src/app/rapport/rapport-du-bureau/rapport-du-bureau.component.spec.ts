@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RechercheParDateComponent } from './recherche-par-date.component';
+import { RapportDuBureauComponent } from './rapport-du-bureau.component';
 
-describe('RechercheParDateComponent', () => {
-  let component: RechercheParDateComponent;
-  let fixture: ComponentFixture<RechercheParDateComponent>;
+describe('RapportDuBureauComponent', () => {
+  let component: RapportDuBureauComponent;
+  let fixture: ComponentFixture<RapportDuBureauComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RechercheParDateComponent ]
+      declarations: [ RapportDuBureauComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RechercheParDateComponent);
+    fixture = TestBed.createComponent(RapportDuBureauComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

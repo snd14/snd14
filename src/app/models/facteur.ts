@@ -3,8 +3,8 @@ export class Facteur {
   nom: string;
   prenom:string;
   libelle:string;
-  libelleStructure:string;
-  //libellestr:number;  
+  structureId:number;  
   active:boolean;
-  
+  libelleStructure:string;
+
 }

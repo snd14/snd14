@@ -27,6 +27,7 @@ export class ListeFacteurComponent implements OnInit {
   facteurSubject=new Subject<Facteur[]>();
   Libelle=[];
   libelleStructure=[];
+  libellestr:number;
   id:number;
 
   constructor(private route: ActivatedRoute, 
@@ -49,8 +50,8 @@ export class ListeFacteurComponent implements OnInit {
       nom:['',Validators.required],
       prenom:['',Validators.required],
       libelle:['',Validators.required],
-      //libellestr:[null],
-      libelleStructure:[''],
+      libellestr:[null],
+     // libelleStructure:[''],
       active:[false,Validators.required]
       
     });
@@ -65,8 +66,9 @@ export class ListeFacteurComponent implements OnInit {
     this.serviceFacteur.getidStructure().subscribe(data => {
       this.libelleStructure=data;
       
-      console.log(this.libelleStructure);
+      console.log(this.libellestr);
     });
+    console.log(this.libellestr);
 
   }
   txt:string="bonjour"
@@ -106,8 +108,11 @@ export class ListeFacteurComponent implements OnInit {
     
         this.serviceFacteur.getfacteurbyId(facte).subscribe(result=>{
         this.facte=result;
+
+        
+        debugger
        // this.id=this.facte.libelleStructure;
-       // console.log(this.id);
+       console.log(this.facte.libelleStructure);
       
         });
    
@@ -133,21 +138,22 @@ export class ListeFacteurComponent implements OnInit {
     const prenom = this.facteurForm.get('prenom').value; 
     const libelle = this.facteurForm.get('libelle').value; 
     const active = this.facteurForm.get('active').value;
-    const libelleStructure = this.facteurForm.get('libelleStructure').value; 
-    
+    const libell = this.facteurForm.get('libellestr').value; 
+   // const lib:number=libellestr;
+   console.log(libell);
     const ffacteur=new Facteur()
     ffacteur.id=id;
     ffacteur.nom=nom;
     ffacteur.prenom=prenom;
     ffacteur.libelle=libelle;
     ffacteur.active=active;
-    ffacteur.libelleStructure=libelleStructure;
+    ffacteur.structureId=libell;
     
         this.serviceFacteur.save(ffacteur).subscribe(data => this.getFacteurs());
-        console.log(ffacteur);
+        
         //this.onReset();
         //this.messageAjout();
-        this.message();
+        this.showNotification('top','center');
 
     }
     gotoFacteurList(){
@@ -161,18 +167,19 @@ export class ListeFacteurComponent implements OnInit {
   this.serviceFacteur.modifier(this.facte).subscribe(data =>this.getFacteurs());;
     //this.message();
     this.showNotification('top','center') 
+    console.log(this.facte);
   }
 
   showNotification(from: any, align: any) {
     const type = ['', 'success', 'warning', 'danger','info', 'rose', 'primary'];
 
-    const color = Math.floor((Math.random() * 6) + 1);
+   // const color = Math.floor((Math.random() * 6) + 1);
 
     $.notify({
         icon: 'notifications',
         message: '<b>modification reussit</b> :'
     }, {
-        type: type[color],
+        type: type[1],
         timer: 2000,
         placement: {
             from: from,
@@ -207,7 +214,7 @@ export class ListeFacteurComponent implements OnInit {
     message(){
       swal.fire({
         
-          title: "Good job!",
+          title: "enregistre!",
           text: "You clicked the button!",
           buttonsStyling: false,
           customClass:{

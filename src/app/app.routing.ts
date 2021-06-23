@@ -28,6 +28,10 @@ export const AppRoutes: Routes = [
       path: 'paiements',
       loadChildren: './paiements/paiements.module#PaiementsModule'
   },
+  {
+    path: 'rapport',
+    loadChildren: './rapport/rapport.module#RapportModule'
+},
     {
         path: 'parametres',
         loadChildren: './parametres/parametres.module#ParametresModule'

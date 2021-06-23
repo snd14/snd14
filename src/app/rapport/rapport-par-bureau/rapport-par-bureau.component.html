@@ -1,3 +1,4 @@
+<p>rapport-du-bureau works!</p>
 <div class="main-content">
     <div class="container-fluid">
         <div class="card">
@@ -46,12 +47,12 @@
                  
 
                  <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" *ngIf ="paiements">
                         <br>
                         <div class="row">
                           <label class="col-md-5"></label>
-                           <label class="col-md-4" style="float:right;"><h4 >Etat de paiement </h4></label>
-                            <table class="table" *ngIf ="datefin">
+                           <label class="col-md-4" ><h4 >Etat de paiement par bureau </h4><br></label>
+                            <table class="table" >
                               
                               <thead>
                                

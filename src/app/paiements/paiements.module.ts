@@ -9,12 +9,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../app.module';
 import { ServicePaimentService } from '../services/service-paiment.service';
-import { RechercheParDateComponent } from './recherche-par-date/recherche-par-date.component';
+//import { RechercheParDateComponent } from './recherche-par-date/recherche-par-date.component';
 import { ListePaimentComponent } from './liste-paiment/liste-paiment.component';
 
 
 @NgModule({
-  declarations: [RechercherPaiementComponent, AjoutPaiementComponent, RechercheParDateComponent, ListePaimentComponent],
+  declarations: [RechercherPaiementComponent, AjoutPaiementComponent, ListePaimentComponent],
   imports: [
     CommonModule,MaterialModule,FormsModule,
     RouterModule.forChild(paiementRoutes),

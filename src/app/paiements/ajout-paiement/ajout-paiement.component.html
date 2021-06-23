@@ -6,7 +6,7 @@
             <div class="card-header card-header-rose card-header-icon">
               <div class="card-icon">
                 <i class="material-icons">contacts</i>
-              </div>
+              </div> 
               <h4 class="card-title">Paiement axiliaires  </h4>
             </div>
             <div class="card-body ">
@@ -50,36 +50,54 @@
                     <td>{{item.parametreFacteur.netAPayer}}</td>
                     <td>{{item.parametreFacteur.remise}}</td>
                     <td>{{item.parametreFacteur.tva}}</td>
+                    <td></td>
                     
                     
+                    
+                  </tr>
+                   
+                     <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                     </tr>
                     
                    
                     
-                    </tr>
+                    
                     </tbody>
                     <tfoot>
-                       <tr>
-                        <td colspan="5"></td><td>Nbre Facteurs</td><td>{{paiement.facteurs.length}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>Total TTC</td><td>{{montantTtc}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>TotalmontantHt</td><td>{{montantHt}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>Total net</td><td>{{netApayer}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>TotalTva</td><td>{{tva}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>Totalremise</td><td>{{remise}}</td>
-                       </tr>
+                      <tr>
+                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                      
+                        <td></td>
+                      </tr> 
                      </tfoot>  
                   </table>
                 </div>
               </form>
+              <h6>
+                <div class="row">
+                  <label class="col-md-4">Nbre Facteurs = <span style="font-weight: normal"> {{paiement.facteurs.length}}</span>  </label>
+
+               
+                  <label class="col-md-4">Total TTC = <span style="font-weight: normal"> {{montantTtc}}</span> 
+                  </label>
+
+               
+                  <label class="col-md-4">TotalmontantHt = <span style="font-weight: normal"> {{montantHt}} </span> </label>
+
+               
+               
+              </div><br>
+              <div class="row">
+                <label class="col-md-4">Total net =<span style="font-weight: normal">   {{netApayer}}</span> </label>
+                  
+                  <label class="col-md-4">TotalTva = <span style="font-weight: normal">   {{tva}}</span> </label>
+                  <label class="col-md-4">Totalremise = <span style="font-weight: normal">   {{remise}}</span> </label>
+
+                
+                  
+                                 
+              </div>
+            </h6>
             </div>
             <div class="card-footer ">
               <div class="row">
@@ -129,6 +147,7 @@
                       <th>netAPayer</th>
                       <th>Remise</th>
                       <th>Tva</th>
+                      <th>Signature</th>
                      
                     </thead>
                     <tbody>
@@ -142,41 +161,52 @@
                     <td>{{item.facteur.parametreFacteur.remise}}</td>    
                     <td>{{item.facteur.parametreFacteur.tva}}</td>
                     
+                    <td></td>
                     
                     
-                   
+                   </tr>
                     
-                    </tr>
-                    </tbody>
-                    <tfoot >
-                      <tr>
-                        <td></td>
+                      <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                       </tr>
-                      <tr>
-                        <td></td>
-                      </tr> 
-                       <tr >
-                        <td colspan="5"></td><td>Nbre Facteurs</td><td>{{paiement.paiements.length}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>Total TTC</td><td>{{montantTtc}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>TotalmontantHt</td><td>{{montantHt}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>Total net</td><td>{{netApayer}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>TotalTva</td><td>{{tva}}</td>
-                       </tr>
-                       <tr>
-                        <td colspan="5"></td><td>Totalremise</td><td>{{remise}}</td>
-                       </tr>
-                     </tfoot>  
+                      
+                    </tbody>
+                     
                   </table>
                 </div>
               </form>
+                <h6>
+                    <div class="row">
+                      <label class="col-md-4">Nbre Facteurs = <span style="font-weight: normal"> {{paiement.paiements.length}}</span>  </label>
+
+                   
+                      <label class="col-md-4">Total TTC = <span style="font-weight: normal"> {{montantTtc}}</span> 
+                      </label>
+
+                   
+                      <label class="col-md-4">TotalmontantHt = <span style="font-weight: normal"> {{montantHt}} </span> </label>
+
+                   
+                   
+                  </div><br>
+                  <div class="row">
+                    <label class="col-md-4">Total net =   {{netApayer}} </label>
+                      
+                      <label class="col-md-4">TotalTva =   {{tva}} </label>
+                      <label class="col-md-4">Totalremise =   {{remise}} </label>
+
+                    
+                      
+                                     
+                  </div>
+                </h6>
+                   
+                  
+                    
+                   
+                   
+                    
+                   
+                
             </div>
             <div class="card-footer ">
               <div class="row">

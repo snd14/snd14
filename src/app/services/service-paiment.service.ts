@@ -43,14 +43,17 @@ constructor(private http: HttpClient) { }
       return this.http.get<Paiementglobal>(urls);
     }
     public getPaiementparDate(date1:string,date2:string):Observable<Paiementglobal[]>{
-      
-      
-      
-      
-      //const urls2 = `${environment.apiUrl+'paiement/'+'date1/'+'date2'}/${date1}/${date2}`; 
+      debugger
+            //const urls2 = `${environment.apiUrl+'paiement/'+'date1/'+'date2'}/${date1}/${date2}`; 
       return this.http.get<Paiementglobal[]>(environment.apiUrl+'paiement/'+date1+'/'+date2);
       
     }
+    public getIdstructureparDate(idStructure:number,date1:string,date2:string):Observable<Paiementglobal[]>{
+      
+      //const urls2 = `${environment.apiUrl+'paiement/'+'date1/'+'date2'}/${date1}/${date2}`; 
+return this.http.get<Paiementglobal[]>(environment.apiUrl+'paiement/'+idStructure+'/'+date1+'/'+date2);
+
+}
 
     //liste paiement 
     listePaiement():Paiementglobal[]{
@@ -71,7 +74,7 @@ constructor(private http: HttpClient) { }
     UpdatePaiement(p:Paiementglobal){
     return this.http.put(environment.apiUrl+'mois/',p);
     }
-    save(paie:Paiement_test) {
+    public save(paie:Paiement_test) {
       
      
       return this.http.post<Paiementglobal>(environment.apiUrl+'paiementGlobal', paie);

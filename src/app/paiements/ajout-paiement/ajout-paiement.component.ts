@@ -110,7 +110,9 @@ savePaiement(){
 
   this.PaiementService.save(pw).subscribe(data=>{
     this.paiement= data;
-    debugger
+    
+var date2 = new Date();
+   // console.log(date2.getDay);
     
   });
  

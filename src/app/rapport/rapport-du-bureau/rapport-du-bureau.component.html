@@ -1,0 +1,92 @@
+<p>rapport-du-bureau works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+                <div class="card-header card-header-rose card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">assignment</i>
+                  </div>
+                  <h4 class="card-title">Date Paiement
+                   
+                  </h4>
+                </div>
+
+        
+            <div class="card-body">
+                <br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <legend>Choisir la date</legend>
+                        <mat-form-field>
+                        <input matInput [matDatepicker]="picker1"  placeholder="la date du" id="datedebut" name="datedebut" [(ngModel)]="datedebut" (click)="picker1.open()">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1 startView="year"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                 
+                 
+                            
+
+                    <div class="col-md-4" >
+                        <legend>Choisir la date</legend>
+                        <mat-form-field>
+                        <input matInput [matDatepicker]="picker2" placeholder="au" id="datedefin" name="datedefin" [(ngModel)]="datefin" (click)="picker2.open()">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2 startView="year"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2" style=" float: right;" >
+                      <h1></h1>
+                      
+                      <button mat-raised-button class="btn btn-raised  btn-info" style=" margin-top: 25px" (click)="getlistepaiement()">rechercher</button>
+                    </div>
+                 </div>
+
+                
+                 </div>
+                 
+
+                 <div class="card"  *ngIf ="paiements">
+                    <div class="card-body">
+                        <br>
+                        <div class="row" >
+                          <label class="col-md-5"></label>
+                           <label class="col-md-4" style="float:right;"><h4 >Etat de paiement  du bureau</h4></label>
+                            <table class="table">
+                              
+                              <thead>
+                               
+                                <th>mois</th>
+                                <th>Annee</th>
+                                <th>datePaiment</th>
+                                <th>totalMontant_Ht</th>
+                                <th>totalMontant_ttc</th>
+                                <th>totalnetAPayer</th>
+                                <th>totalRemise</th>
+                                <th>totalTva</th>
+                               
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let item of paiements" >
+                                      <td>{{item.mois}}</td>
+                                      <td>{{item.annee}}</td>
+                                      <td>{{item.datepaie}}</td>
+                                      <td>{{item.totalMontantHt}}</td>
+                                      <td>{{item.totalTtc}}</td>
+                                      <td>{{item.netapayer}}</td>
+                                      
+                                      <td>{{item.totalRemise}}</td>
+                                      <td>{{item.totaltva}}</td>
+                                      
+
+
+                                  </tr>
+                               </tbody> 
+                              </table>
+                            </div>    
+                     </div>
+                 </div> 
+            
+         </div>
+    </div>
+</div>   

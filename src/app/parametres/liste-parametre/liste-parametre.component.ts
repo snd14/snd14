@@ -20,6 +20,7 @@ export class ListeParametreComponent implements OnInit {
   parametres:Parametre[];
   pa_parametre:Parametre;
   params:Parametre;
+  parametr:Parametre;
 
   constructor(private route: ActivatedRoute, 
     private router: Router, 
@@ -32,6 +33,10 @@ export class ListeParametreComponent implements OnInit {
   ngOnInit() {
     this.getParametres();
     this.parametreform();
+    //this.params=null;
+
+    
+  //this.getParametrebyId(this.params.id);
   }
   parametreform(){
     this.parametreForm = this.formbuildParam.group({ 
@@ -91,7 +96,7 @@ export class ListeParametreComponent implements OnInit {
      
     
     this.servicePrametre.save(pparametre).subscribe(result => this.getParametres());
-    this.message();
+    this.showNotification('top','center');
     //this.getParametres();
    
 }
@@ -109,14 +114,16 @@ gotoParamList(){
   this.router.navigate(['/parametres/liste-parametre']);
   this.getParametres();
 }
-getParametrebyId(params:number){
+getParametrebyId(parame){
     
-  this.servicePrametre.getParametrebyId(params).subscribe(result=>{
+  this.servicePrametre.getParametrebyId(parame.id).subscribe(result=>{
   this.params=result;
   
- // console.log(this.facte);
-
+debugger
+  console.log(this.params)
   });
+  
+  
 }
 update(){
   this.servicePrametre.modifier(this.params).subscribe(data =>this.gotoParamList());
@@ -125,22 +132,22 @@ update(){
 }
 //la notification apres une modification
 showNotification(from: any, align: any) {
-  const type = 'success';
+  const type = ['','success'];
 
-  const color='success';
+  //const color='primary';
 
   $.notify({
-      icon: 'notifications',
-      message: '<b>modification Reussit</b> :'
+     icon: 'notifications',
+      message: '<b> Reussit</b> :'
   }, {
-      type: type[color],
-      timer: 2000,
+      type: type[1],
+      timer: 200,
       placement: {
           from: from,
           align: align
       },
-      template: '<div data-notify="container" class="col-xs-14 col-sm-6 alert alert-{0} alert-with-icon" role="alert">' +
-        '<button mat-raised-button type="button" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+      template: '<div data-notify="container" class="col-xs-14 col-sm-6 alert alert-{0} alert-with-icon success" role="alert">' +
+        '<button mat-raised-button btn btn-success type="button-success" aria-hidden="true" class="close" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
         '<i class="material-icons" data-notify="icon">notifications</i> ' +
         '<span data-notify="title">{1}</span> ' +
         '<span style="text-align:center" data-notify="message">{2}</span>' +

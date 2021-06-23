@@ -38,8 +38,8 @@ export class ServiceFacteurService {
   public getlibelle():Observable<string[]>{
     return this.http.get<string[]>(environment.apiUrl+'parametre');
   }
-  public getidStructure():Observable<string[]>{
-    return this.http.get<string[]>(environment.apiUrl+'structure');
+  public getidStructure():Observable<any[]>{
+    return this.http.get<any[]>(environment.apiUrl+'structure');
   }
 
   public getfacteurbyId(facte:number):Observable<Facteur>{
