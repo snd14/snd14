@@ -1,10 +1,12 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, Directive } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, Directive, Attribute } from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {KeycloakService} from 'keycloak-angular';
 import { HttpClient } from '@angular/common/http';
+import { decode } from 'punycode';
+import jwt_decode from 'jwt-decode';
 const misc: any = {
     navbar_menu_visible: 0,
     active_collapse: true,
@@ -30,6 +32,9 @@ export class NavbarComponent implements OnInit {
 
     email ;
     username;
+    lastname;
+    decode;
+    connect;
 
     constructor( private keycloak : KeycloakService , location: Location, private renderer: Renderer2, private element: ElementRef, private router: Router,private http:HttpClient) {
         this.location = location;
@@ -39,15 +44,27 @@ export class NavbarComponent implements OnInit {
         this.keycloak.loadUserProfile(true).then(res =>{
 
             // this.email=res.email
-            this.username=res.email
-
+            this.username=res.firstName;
+            this.lastname=res.lastName;
+        
+           // console.log(res);
         });
-
-
-
-
-
+    
+        this.keycloak.getToken().then(data=>{
+            this.connect=data;
+            var decode=jwt_decode(this.connect)
+            const map = new Map(Object.entries(decode));
+            //const obj = Object.entries(map)
+          // console.log(map.get('idBureau'));
+        });
     }
+
+
+
+
+
+
+    
     minimizeSidebar(){
       const body = document.getElementsByTagName('body')[0];
 

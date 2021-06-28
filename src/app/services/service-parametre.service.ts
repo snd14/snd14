@@ -27,6 +27,7 @@ export class ServiceParametreService {
     return this.http.delete<Parametre>(environment.apiUrl+'parametre/'+paramid);
   }
   public getParametrebyId(params:number):Observable<Parametre>{
+    
     return this.http.get<Parametre>(environment.apiUrl+'parametre/'+params);
   }
   public modifier(params: Parametre){

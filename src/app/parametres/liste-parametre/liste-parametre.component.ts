@@ -21,22 +21,25 @@ export class ListeParametreComponent implements OnInit {
   pa_parametre:Parametre;
   params:Parametre;
   parametr:Parametre;
+  donnee:Parametre;
 
   constructor(private route: ActivatedRoute, 
     private router: Router, 
     private servicePrametre:ServiceParametreService,
     private formbuildParam:FormBuilder) { 
       this.pa_parametre=new Parametre();
-      this.params=new Parametre();
+     this.params=new Parametre();
     }
 
   ngOnInit() {
     this.getParametres();
     this.parametreform();
+    
     //this.params=null;
 
     
-  //this.getParametrebyId(this.params.id);
+ // this.getParametrebyId(this.params.id);
+  
   }
   parametreform(){
     this.parametreForm = this.formbuildParam.group({ 
@@ -50,6 +53,19 @@ export class ListeParametreComponent implements OnInit {
       tva:[null,Validators.required],
     });
 
+  }
+  getParametrebyId(parame){
+  
+    this.servicePrametre.getParametrebyId(parame.id).subscribe(result=>{
+    this.params=result;
+   // this.donnee=this.params;
+    
+    debugger
+    console.log(this.params.libelle)
+    });
+    
+    
+    
   }
   getParametres():void{
     this.servicePrametre.find().subscribe(data => {
@@ -114,16 +130,9 @@ gotoParamList(){
   this.router.navigate(['/parametres/liste-parametre']);
   this.getParametres();
 }
-getParametrebyId(parame){
-    
-  this.servicePrametre.getParametrebyId(parame.id).subscribe(result=>{
-  this.params=result;
-  
-debugger
-  console.log(this.params)
-  });
-  
-  
+
+showParam(){
+  //this.getParametrebyId
 }
 update(){
   this.servicePrametre.modifier(this.params).subscribe(data =>this.gotoParamList());
