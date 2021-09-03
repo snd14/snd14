@@ -20,8 +20,8 @@
               </mat-form-field>
               <mat-form-field>
                 <mat-select placeholder="Année" name="annee" [(ngModel)]="rechAnne">
-                    <mat-option *ngFor="let a of listAnnee " [value]="a.value" >
-                        {{ a.viewValue }}
+                    <mat-option *ngFor="let a of ltAnnee " [value]="a.annee" >
+                        {{ a.annee }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

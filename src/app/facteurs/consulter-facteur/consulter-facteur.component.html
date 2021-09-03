@@ -1,0 +1,84 @@
+<div class="main-content">
+    <div class="container-fluid">
+  
+      <div class="row">
+        <div class="col-md-12">
+  
+          <!--la table -->
+  
+          <div class="card">
+            <div class="card-header card-header-rose card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">assignment</i>
+              </div>
+              <h4 class="card-title">Table des facteurs
+                <button mat-raised-button class="btn btn-raised  btn-info" style="float:right" data-toggle="modal"
+                  data-target="#myModal" *ngIf="isDcp()">
+                  ajouter facteur
+                </button>
+              </h4>
+            </div>
+  
+            <div class="card-body">
+  
+              <div class="table-responsive" id="mytable">
+  
+                <table class="table">
+  
+                  <thead style="background-color: whitesmoke;">
+  
+                    <tr>
+                     <!-- <th class="text-center"><b>Id</b> </th>-->
+                      <th class="text-center"><b>Nom</b></th>
+                      <th class="text-center"><b>Prenom</b></th>
+                      <th class="text-center"><b>TypeFacteur</b></th>
+                      <th class="text-center"><b>libelleStructure</b></th>
+                      <th class="text-center"><b>Active</b></th>
+                      <th class="text-right"><b>Action</b></th>
+                    </tr>
+                  </thead>
+  
+                  <tbody>
+                    <tr *ngFor="let fact of facteurs let factes of facte ">
+                     <!-- <td class="text-center">{{fact.id}}</td>-->
+                      <td class="text-center">{{fact.nom}}</td>
+                      <td class="text-center">{{fact.prenom}}</td>
+                      <td class="text-center">{{fact.libelle}}</td>
+                      <td class="text-center">{{fact.libelleStructure}}</td>
+                      <td class="text-center"><span class="badge badge-success" *ngIf="fact.active">Oui</span>
+                        <span class="badge badge-danger" *ngIf="!fact.active">Non</span>
+                      </td>
+                      <td class="td-actions text-right">
+  
+                        <button mat-raised-button type="button" class="btn btn-info ">
+                          <i class="material-icons" data-toggle="modal" data-target="#noticeModal"
+                            (click)="getfacteurbyId(factes)">edit</i>
+                        </button>
+                       <!-- <button mat-raised-button type="button" class="btn btn-danger ">
+                          <i class="fa fa-trash-o" (click)="showSwal(fact)"></i>
+                        </button>-->
+                      </td>
+                    </tr>
+                  </tbody>
+                  <button mat-raised-button class="btn btn-raised  btn-info" style="float:right"
+                    (click)="upload()">telecharger</button>
+                </table>
+  
+  
+              </div>
+  
+  
+            </div>
+            
+  
+  
+  
+          </div>
+        </div>
+  
+  
+  
+  
+  
+      </div>
+    </div>

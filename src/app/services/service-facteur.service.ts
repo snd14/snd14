@@ -28,6 +28,10 @@ export class ServiceFacteurService {
    public find(): Observable<Facteur[]> {
     return this.http.get<Facteur[]>(environment.apiUrl+'facteurs');
   }
+  public findbyid(idstructure:number): Observable<Facteur[]> {
+    return this.http.get<Facteur[]>(environment.apiUrl+'facteursID/'+idstructure);
+  }
+
 
   public save(pa_facteur: Facteur) {
     return this.http.post<Facteur>(environment.apiUrl+'facteur', pa_facteur);

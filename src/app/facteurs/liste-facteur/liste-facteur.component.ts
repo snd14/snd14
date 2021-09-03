@@ -7,6 +7,7 @@ import { Subject, Subscription } from 'rxjs';
 import swal from 'sweetalert2';
 import { Facteur } from 'src/app/models/facteur';
 import { ServiceFacteurService } from 'src/app/services/service-facteur.service';
+import { KeycloakService } from 'keycloak-angular';
 
 declare var $: any;
 interface jsPDFWithPlugin extends jsPDF{
@@ -29,12 +30,16 @@ export class ListeFacteurComponent implements OnInit {
   libelleStructure=[];
   libellestr:number;
   id:number;
+  donnee:Facteur;
+  dataa:any;
+  hasAccess;
 
-  constructor(private route: ActivatedRoute, 
+  constructor(public keycloak: KeycloakService,private route: ActivatedRoute, 
     private router: Router,private formbuildFacteur:FormBuilder, 
     private serviceFacteur:ServiceFacteurService) { 
       this.pa_facteur=new Facteur()
-                  this.facte=new Facteur()
+                  this.facte=new Facteur();
+                  this.donnee=new Facteur();
     }
 
   ngOnInit(): void {
@@ -57,6 +62,16 @@ export class ListeFacteurComponent implements OnInit {
     });
 
   }
+  isDcp() {
+    this.hasAccess = false
+    if (this.keycloak.getUserRoles().includes("dcp-admin")) {
+        this.hasAccess = true
+    }
+
+    return this.hasAccess
+
+
+}
   getFacteurs():void{
     this.serviceFacteur.find().subscribe(data => {
       this.facteurs = data;
@@ -66,9 +81,9 @@ export class ListeFacteurComponent implements OnInit {
     this.serviceFacteur.getidStructure().subscribe(data => {
       this.libelleStructure=data;
       
-      console.log(this.libellestr);
+      console.log(this.libelleStructure);
     });
-    console.log(this.libellestr);
+   
 
   }
   txt:string="bonjour"
@@ -104,15 +119,14 @@ export class ListeFacteurComponent implements OnInit {
     this.facteurForm.reset();
   }
  
-   getfacteurbyId(facte:number){
+   getfacteurbyId(facte){
     
-        this.serviceFacteur.getfacteurbyId(facte).subscribe(result=>{
-        this.facte=result;
-
-        
-        debugger
+        this.serviceFacteur.getfacteurbyId(facte.id).subscribe(result=>{
+        this.donnee=result;
+        this.dataa=this.donnee.libelleStructure;
        // this.id=this.facte.libelleStructure;
-       console.log(this.facte.libelleStructure);
+       console.log(this.dataa);
+      // console.log(this.facte.libelleStructure);
       
         });
    
@@ -164,10 +178,12 @@ export class ListeFacteurComponent implements OnInit {
   }
  
   update(){
-  this.serviceFacteur.modifier(this.facte).subscribe(data =>this.getFacteurs());;
+    this.donnee.structureId=this.dataa;
+  this.serviceFacteur.modifier(this.donnee).subscribe(data =>this.getFacteurs());;
     //this.message();
+    this.getidStructure();
     this.showNotification('top','center') 
-    console.log(this.facte);
+    console.log(this.donnee);
   }
 
   showNotification(from: any, align: any) {
@@ -268,8 +284,8 @@ export class ListeFacteurComponent implements OnInit {
           text: 'prenom : '+fact.prenom +' et de nom: '+fact.nom,
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonText: 'Yes, delete it!',
-          cancelButtonText: 'No, keep it',
+          confirmButtonText: 'supprimer',
+          cancelButtonText: 'annuler',
           customClass:{
             confirmButton: "btn btn-success",
             cancelButton: "btn btn-danger",
@@ -279,8 +295,8 @@ export class ListeFacteurComponent implements OnInit {
         if (result.value) {
           this.supprimer(fact.id)
           swal.fire({
-              title: 'Deleted!',
-              text: 'Your imaginary file has been deleted.',
+              title: 'suppression!',
+              text: '',
               icon: 'success',
               customClass:{
                 confirmButton: "btn btn-success",

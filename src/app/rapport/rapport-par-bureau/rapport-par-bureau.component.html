@@ -1,4 +1,4 @@
-<p>rapport-du-bureau works!</p>
+
 <div class="main-content">
     <div class="container-fluid">
         <div class="card">
@@ -15,8 +15,8 @@
             <div class="card-body">
                 <br>
                 <div class="row">
-                    <div class="col-md-4">
-                        <legend>Choisir la date</legend>
+                    <div class="col-md-3">
+                        <legend>la date du</legend>
                         <mat-form-field>
                         <input matInput [matDatepicker]="picker1"  placeholder="la date du" id="datedebut" name="datedebut" [(ngModel)]="datedebut" (click)="picker1.open()">
                         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -27,13 +27,45 @@
                  
                             
 
-                    <div class="col-md-4" >
-                        <legend>Choisir la date</legend>
+                    <div class="col-md-3" >
+                        <legend>au</legend>
                         <mat-form-field>
                         <input matInput [matDatepicker]="picker2" placeholder="au" id="datedefin" name="datedefin" [(ngModel)]="datefin" (click)="picker2.open()">
                         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                         <mat-datepicker #picker2 startView="year"></mat-datepicker>
                         </mat-form-field>
+                    </div>
+                    <!-- <div class="form-group">
+                          <label for="libellestr">libelleStructure</label>
+                          <mat-select type="number" id="libellestr" class="form-control" formControlName="libellestr">
+                            <mat-option *ngFor="let structure of libelleStructure" value="{{structure.id}}">
+                              {{structure.libelle}}
+
+                            </mat-option>
+                                                  </mat-select>
+
+                                                  <div class="form-group">
+                          <label for="libellestr">libelleStructure</label>
+                          <mat-select type="number" id="libellestr" class="form-control" formControlName="libellestr">
+                            <mat-option *ngFor="let structure of libelleStructure" value="{{structure.id}}">
+                              {{structure.libelle}}
+
+                            </mat-option>
+
+                          </mat-select>
+                        </div>
+                        </div>-->
+                    <div class="col-md-3 form-group"  style=" margin-top: -2px">
+                      <legend>Bureau</legend>
+                      <mat-form-field>
+                        <mat-select  name="libelleStructure"
+                          id="libelleStructure" [(ngModel)]="libellestr" >
+                          <mat-option *ngFor="let str of libelleStructure" value="{{str.id}}">{{str.libelle}}
+                          </mat-option>
+                          
+                        </mat-select>
+
+                      </mat-form-field>
                     </div>
                     <div class="col-md-2" style=" float: right;" >
                       <h1></h1>

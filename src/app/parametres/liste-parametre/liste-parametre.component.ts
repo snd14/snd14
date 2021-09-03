@@ -28,13 +28,16 @@ export class ListeParametreComponent implements OnInit {
     private servicePrametre:ServiceParametreService,
     private formbuildParam:FormBuilder) { 
       this.pa_parametre=new Parametre();
-     this.params=new Parametre();
+     //this.params=new Parametre();
+     this.donnee=new Parametre();
     }
 
   ngOnInit() {
     this.getParametres();
     this.parametreform();
+    //this.update();
     
+    console.log(this.params)
     //this.params=null;
 
     
@@ -57,11 +60,11 @@ export class ListeParametreComponent implements OnInit {
   getParametrebyId(parame){
   
     this.servicePrametre.getParametrebyId(parame.id).subscribe(result=>{
-    this.params=result;
+    this.donnee=result;
    // this.donnee=this.params;
     
-    debugger
-    console.log(this.params.libelle)
+  
+    console.log(this.params)
     });
     
     
@@ -118,9 +121,9 @@ export class ListeParametreComponent implements OnInit {
 }
 supprimer(paramid:number) {
      
-  this.servicePrametre.delete(paramid).subscribe(result => this.gotoParamList());
-  this.getParametres();
-  this.message();
+  this.servicePrametre.delete(paramid).subscribe(result => this.getParametres());
+  
+ // this.message();
   
  // this.facteurSubject.next(this.facteurs.slice())
 
@@ -135,9 +138,10 @@ showParam(){
   //this.getParametrebyId
 }
 update(){
-  this.servicePrametre.modifier(this.params).subscribe(data =>this.gotoParamList());
+  this.servicePrametre.modifier(this.donnee).subscribe(data =>this.gotoParamList());
  //this.message();
  this.showNotification('top','center');
+
 }
 //la notification apres une modification
 showNotification(from: any, align: any) {
@@ -185,11 +189,11 @@ showSwal(param) {
   //if (type == 'warning-message-and-cancel') {
     swal.fire({
       title: 'etes vous sure de supprimer?',
-        text: 'You will not be able to recover this imaginary file!',
+        text: 'le type  '+param.libelle,
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, keep it',
+        confirmButtonText: 'supprimer!',
+        cancelButtonText: 'Annuler',
         customClass:{
           confirmButton: "btn btn-success",
           cancelButton: "btn btn-danger",
@@ -199,8 +203,8 @@ showSwal(param) {
       if (result.value) {
         this.supprimer(param.id)
         swal.fire({
-            title: 'Deleted!',
-            text: 'Your imaginary file has been deleted.',
+            title: 'suppression!',
+            text: 'le type  '+param.libelle,
             icon: 'success',
             customClass:{
               confirmButton: "btn btn-success",
@@ -209,8 +213,8 @@ showSwal(param) {
         });
       } else {
         swal.fire({
-            title: 'Cancelled',
-            text: 'Your imaginary file is safe :)',
+            title: 'suppression annuler',
+            text: 'la suppression du type  '+param.libelle +'  est annule',
             icon: 'error',
             customClass:{
               confirmButton: "btn btn-info",

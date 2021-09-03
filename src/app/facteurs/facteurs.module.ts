@@ -8,10 +8,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ServiceFacteurService } from '../services/service-facteur.service';
+import { ConsulterFacteurComponent } from './consulter-facteur/consulter-facteur.component';
 
 
 @NgModule({
-  declarations: [ListeFacteurComponent],
+  declarations: [ListeFacteurComponent, ConsulterFacteurComponent],
   imports: [
     CommonModule,
     MaterialModule,

@@ -252,7 +252,7 @@ export class NavbarComponent implements OnInit {
     deconnexion(){
         this.keycloak.logout() ;
 
-         this.router.navigateByUrl("tables/datatables.net");
+         this.router.navigateByUrl("http://localhost:4200/");//tables/datatables.net
          return this.keycloak.logout() ;
     }
     isCamaraApp(){

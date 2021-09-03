@@ -5,6 +5,7 @@ export class Paiementglobal {
     idStructure: number;
     libelleStructure: String;
     mois: number;
+    libMois:string;
     annee: number;
     datepaie: Date;
     netapayer: number;

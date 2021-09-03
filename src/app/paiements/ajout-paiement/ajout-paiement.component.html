@@ -1,7 +1,123 @@
 <div class="main-content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12" *ngIf ="!paiement.id" >
+        <!--testbudget-->
+        <div class="col-md-12" *ngIf ="!paiement.id && tva>montant"  >
+          
+         
+          <div class="card " >
+            <div class="card-header card-header-rose card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">contacts</i>
+              </div> 
+              <h4 class="card-title">Paiement axiliaires  </h4>
+              
+            </div>
+            <!--{{showNotification()}}-->
+          <div class="card-body ">
+            <form class="form-horizontal" >  
+              <div class="row">
+                <label class="col-md-2 col-2 col-form-label">Mois</label>
+                <div class="col-md-4 col-9">
+                  <mat-form-field class="example-full-width">
+                    <input matInput type="text" id="mois" name="mois" [(ngModel)]="libelleM" >
+                  </mat-form-field>
+                </div>
+                <label class="col-md-2 col-2 col-form-label">Année</label>
+                <div class="col-md-4 col-9">
+                  <mat-form-field class="example-full-width">
+                    <input matInput type="number" id="annee" name="annee" [(ngModel)]="paiement.annee" >
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                
+                <table class="table">
+                  <thead>
+                    <th>nom</th>
+                    <th>prenom</th>
+                    <th>libelle</th>
+                    
+                    <th>Montant_Ht</th>
+                    <th>Montant_ttc</th>
+                    <th>netAPayer</th>
+                    <th>Remise</th>
+                    <th>Tva</th>
+                   
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of facteurs ;let i=index">
+                  <td>{{item.nom}}</td>
+                  <td>{{item.prenom}}</td>
+                  <td>{{item.parametreFacteur.libelle}}</td>
+                  <td>{{item.parametreFacteur.montantHt}}</td>
+                  <td>{{item.parametreFacteur.montantTtc}}</td>
+                  <td>{{item.parametreFacteur.netAPayer}}</td>
+                  <td>{{item.parametreFacteur.remise}}</td>
+                  <td>{{item.parametreFacteur.tva}}</td>
+                  <td></td>
+                  
+                  
+                  
+                </tr>
+                 
+                   <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                   </tr>
+                  
+                 
+                  
+                  
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    
+                      <td></td>
+                    </tr> 
+                   </tfoot>  
+                </table>
+              </div>
+            </form>
+            <h6>
+              <div class="row">
+                <label class="col-md-4">Nbre Facteurs = <span style="font-weight: normal"> {{paiement.facteurs.length}}</span>  </label>
+
+             
+                <label class="col-md-4">Total TTC = <span style="font-weight: normal"> {{montantTtc}}</span> 
+                </label>
+
+             
+                <label class="col-md-4">TotalmontantHt = <span style="font-weight: normal"> {{montantHt}} </span> </label>
+
+             
+             
+            </div><br>
+            <div class="row">
+              <label class="col-md-4">Total net =<span style="font-weight: normal">   {{netApayer}}</span> </label>
+                
+                <label class="col-md-4">TotalTva = <span style="font-weight: normal">   {{tva}}</span> </label>
+                <label class="col-md-4">Totalremise = <span style="font-weight: normal">   {{remise}}</span> </label>
+
+              
+                
+                               
+            </div>
+          </h6>
+          </div>
+          <div class="card-footer ">
+            <div class="row">
+              <div class="col-md-9">
+                <button mat-raised-button type="submit" class="btn btn-fill btn-success"(click)="savePaiement()" disabled>Valider</button>
+              </div>
+            </div>
+          </div>
+        </div>
+                  </div>
+                  
+                  
+        
+        <!--fintest-->
+        <div class="col-md-12" *ngIf ="!paiement.id  && montant>tva" >
           <div class="card ">
             <div class="card-header card-header-rose card-header-icon">
               <div class="card-icon">
@@ -15,7 +131,7 @@
                   <label class="col-md-2 col-2 col-form-label">Mois</label>
                   <div class="col-md-4 col-9">
                     <mat-form-field class="example-full-width">
-                      <input matInput type="number" id="mois" name="mois" [(ngModel)]="paiement.mois" >
+                      <input matInput type="text" id="mois" name="mois" [(ngModel)]="libelleM" >
                     </mat-form-field>
                   </div>
                   <label class="col-md-2 col-2 col-form-label">Année</label>
@@ -124,7 +240,7 @@
                   <label class="col-md-2 col-2 col-form-label">Mois</label>
                   <div class="col-md-4 col-9">
                     <mat-form-field class="example-full-width">
-                      <input matInput type="number" id="mois" name="mois" [(ngModel)]="paiement.mois" >
+                      <input matInput type="text" id="mois" name="mois" [(ngModel)]="libelleM" >
                     </mat-form-field>
                   </div>
                   <label class="col-md-2 col-2 col-form-label">Année</label>
@@ -155,11 +271,11 @@
                     <td>{{item.facteur.nom}}</td>
                     <td>{{item.facteur.prenom}}</td>
                     <td>{{item.facteur.parametreFacteur.libelle}}</td>
-                    <td>{{item.facteur.parametreFacteur.montantHt}}</td>
-                    <td>{{item.facteur.parametreFacteur.montantTtc}}</td>
-                    <td>{{item.facteur.parametreFacteur.netAPayer}}</td>
-                    <td>{{item.facteur.parametreFacteur.remise}}</td>    
-                    <td>{{item.facteur.parametreFacteur.tva}}</td>
+                    <td>{{item.facteur.parametreFacteur.montantHt.toLocaleString()}}</td>
+                    <td>{{item.facteur.parametreFacteur.montantTtc | number}}</td>
+                    <td>{{item.facteur.parametreFacteur.netAPayer.toLocaleString()}}</td>
+                    <td>{{item.facteur.parametreFacteur.remise.toLocaleString()}}</td>    
+                    <td>{{item.facteur.parametreFacteur.tva.toLocaleString()}}</td>
                     
                     <td></td>
                     
@@ -176,23 +292,23 @@
               </form>
                 <h6>
                     <div class="row">
-                      <label class="col-md-4">Nbre Facteurs = <span style="font-weight: normal"> {{paiement.paiements.length}}</span>  </label>
+                      <label class="col-md-4">Nbre Facteurs = <span style="font-weight: normal"> {{paiement.paiements.length.toLocaleString()}}</span>  </label>
 
                    
-                      <label class="col-md-4">Total TTC = <span style="font-weight: normal"> {{montantTtc}}</span> 
+                      <label class="col-md-4">Total TTC = <span style="font-weight: normal"> {{montantTtc.toLocaleString()}}</span> 
                       </label>
 
                    
-                      <label class="col-md-4">TotalmontantHt = <span style="font-weight: normal"> {{montantHt}} </span> </label>
+                      <label class="col-md-4">TotalmontantHt = <span style="font-weight: normal"> {{montantHt.toLocaleString()}} </span> </label>
 
                    
                    
                   </div><br>
                   <div class="row">
-                    <label class="col-md-4">Total net =   {{netApayer}} </label>
+                    <label class="col-md-4">Total net =   {{netApayer.toLocaleString()}} </label>
                       
-                      <label class="col-md-4">TotalTva =   {{tva}} </label>
-                      <label class="col-md-4">Totalremise =   {{remise}} </label>
+                      <label class="col-md-4">TotalTva =   {{tva.toLocaleString()}} </label>
+                      <label class="col-md-4">Totalremise =   {{remise.toLocaleString()}} </label>
 
                     
                       

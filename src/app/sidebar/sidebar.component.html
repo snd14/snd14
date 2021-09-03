@@ -105,7 +105,7 @@
       
           </ul>
         
-            <ul class="nav" *ngIf="isDcp() || isReceveur()">
+            <ul class="nav" *ngIf="isReceveur() ">
                 <li routerLinkActive="active" class="nav-item">
                   
                     <a [routerLink]="[menuItems[1].path]" *ngIf="menuItems[1].type === 'link'" class="nav-link">
@@ -139,7 +139,7 @@
             </ul>
             <!--facteur-->
             
-            <ul class="nav" *ngIf="isDcp() || isReceveur()">
+            <ul class="nav" *ngIf="isDcp() || isDrp() || isCCB" >
                 <li routerLinkActive="active" class="nav-item">
                   
                     <a [routerLink]="[menuItems[2].path]" *ngIf="menuItems[2].type === 'link'" class="nav-link">
@@ -166,6 +166,7 @@
         
                                 </a>
                             </li>
+                            
                         </ul>
                     </div>
                 </li>
@@ -227,7 +228,7 @@
                     
                     <div id="{{menuItems[4].collapse}}" class="collapse" *ngIf="menuItems[4].type === 'sub'">
                         
-                        <ul class="nav" *ngIf="isDcp() || isReceveur()">
+                        <ul class="nav" *ngIf="isReceveur()">
                             <li routerLinkActive="active" class="nav-item">
                                 <a [routerLink]="[menuItems[4].path, menuItems[4].children[0].path]" class="nav-link">
         
@@ -239,7 +240,7 @@
                         </ul>
         
                       
-                       <ul class="nav" *ngIf="isDcp() || isDrp()">
+                       <ul class="nav" *ngIf="isDcp() || isDrp() || isCCB">
                             <li routerLinkActive="active" class="nav-item">
                                 <a [routerLink]="[menuItems[4].path, menuItems[4].children[1].path]" class="nav-link">
         
@@ -258,6 +259,8 @@
                     </div>
                 </li>
                 </ul>
+
+   </div>             
             <!--fin erapport-->
 <!--       
           <ul class="nav">

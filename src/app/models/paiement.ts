@@ -9,5 +9,6 @@ export class Paiement{
     netApayer:number;
     annee:number;
     mois:number;
+    libelleMois:string;
 
 }

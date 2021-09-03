@@ -2,8 +2,10 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { KeycloakService } from 'keycloak-angular';
 import { Paiementglobal } from 'src/app/models/paiementglobal';
 import { ServicePaimentService } from 'src/app/services/service-paiment.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-rapport-du-bureau',
@@ -16,8 +18,11 @@ export class RapportDuBureauComponent implements OnInit {
   paiements:Paiementglobal[];
   date1:Date;
   date2:Date;
+  idStructure:1;
+  str=1;
+  connectId;
 
-  constructor(private router:Router,private servicepaiment:ServicePaimentService,private datepipe: DatePipe,
+  constructor(private keycloak : KeycloakService ,private router:Router,private servicepaiment:ServicePaimentService,private datepipe: DatePipe,
     private dateAdapter: DateAdapter<Date>) { 
       this.dateAdapter.setLocale('en-GB');
     }
@@ -26,17 +31,27 @@ export class RapportDuBureauComponent implements OnInit {
     this.getlistepaiement();
   }
   getlistepaiement(){
+    //console.log(this.idStructure)
       
     let date1 =this.datepipe.transform(this.datedebut, 'dd-MM-yyyy');
-    let date2 =this.datepipe.transform(this.datefin, 'dd-MM-yyyy');     
-     this.servicepaiment.getPaiementparDate(date1,date2).subscribe(result=>{
+    let date2 =this.datepipe.transform(this.datefin, 'dd-MM-yyyy');
+    this.keycloak.getToken().then(data=>{
+      
+      this.connectId=data;
+      var decode=jwt_decode(this.connectId)
+      const map = new Map(Object.entries(decode));
+      //const obj = Object.entries(map)
+      this.idStructure=map.get('idBureau');   
+      console.log(this.idStructure)  
+     this.servicepaiment.getIdstructureparDate(this.str,date1,date2).subscribe(result=>{
     this.paiements=result; 
     
-  console.log(date1,date2);
+  });
+  //console.log(this.idStructure);
     });
     
   //this.router.navigate(['/paiements/liste-paiment/'+this.datedebut+'/'+this.datefin]);
 
 }
-
+  
 }

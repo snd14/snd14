@@ -6,6 +6,7 @@ import { KeycloakService } from 'keycloak-angular';
 import { Paiementglobal } from 'src/app/models/paiementglobal';
 import { ServicePaimentService } from 'src/app/services/service-paiment.service';
 import jwt_decode from 'jwt-decode';
+import { ServiceFacteurService } from 'src/app/services/service-facteur.service';
 //import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 
 @Component({
@@ -22,13 +23,16 @@ export class RapportParBureauComponent implements OnInit {
   date2:Date;
   date3:Date;
   date4:Date;
-  idStructure:number;
-  connectId;
+  libelleStructure;
+  libellestr:number;
+  
   constructor(private keycloak : KeycloakService ,private router:Router,private servicepaiment:ServicePaimentService,private datepipe: DatePipe,
     private dateAdapter: DateAdapter<Date>) {
       this.dateAdapter.setLocale('en-GB');
      // this.nav.decode;
       //console.log(this.nav.decode);
+     // this.getidStructure();
+      //
       this.keycloak.loadUserProfile(true).then(res =>{
 
         // this.email=res.email
@@ -41,34 +45,46 @@ export class RapportParBureauComponent implements OnInit {
      }
 
   ngOnInit(): void {
-this.methode();
     
+   
+    this.getidStructure();
+   
+   
+
+    //console.log(this.idStructure)
   }
+ 
+  
   getlistepaiement(){
-    
       
     let date1 =this.datepipe.transform(this.datedebut, 'dd-MM-yyyy');
     let date2 =this.datepipe.transform(this.datefin, 'dd-MM-yyyy');     
-     this.servicepaiment.getIdstructureparDate(this.idStructure,date1,date2).subscribe(result=>{
+     this.servicepaiment.getIdstructureparDate(this.libellestr,date1,date2).subscribe(result=>{
     this.paiements=result; 
     
-    
-  //console.log(this.idStructure);
+  console.log(date1,date2);
     });
     
   //this.router.navigate(['/paiements/liste-paiment/'+this.datedebut+'/'+this.datefin]);
 
 }
+getidStructure():void{
+  this.servicepaiment.getidStructure().subscribe(data => {
+    this.libelleStructure=data;
+    
+    console.log(this.libelleStructure);
+  });
+ 
+
+}
+
 methode(){
-  this.keycloak.getToken().then(data=>{
-      
-    this.connectId=data;
-    var decode=jwt_decode(this.connectId)
-    const map = new Map(Object.entries(decode));
-    //const obj = Object.entries(map)
-    this.idStructure=map.get('idBureau');
+ 
+  
+  //this.ngOnInit();
+    //debugger
     //console.log(this.idStructure);
-});
+
 
 }
 

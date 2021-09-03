@@ -53,8 +53,8 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'group',
     collapse: 'facteurs',
     children: [
-        { path: 'liste-facteur', title: 'liste facteurs', ab: 'L', role: 'dcp-admin' }
-        //{path: 'modifier-facteur', title: 'modification facteurs', ab:'M'},
+        { path: 'liste-facteur', title: 'liste facteurs', ab: 'L', role: 'dcp-admin' },
+        {path: 'consulter-facteur', title: 'consultation facteurs', ab:'M'},
 
     ]
 }, {
@@ -77,7 +77,7 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'book',
     collapse: 'rapport',
     children: [
-        { path: 'rapport-du-bureau', title: 'rapport du bureau', ab: 'A', role: 'receveur' },
+        { path: 'rapport-du-bureau', title: 'rapport du bureau', ab: 'A' },
         { path: 'rapport-par-bureau', title: 'rapport par bureau', ab: 'R', role: 'drp-admin' },
         // {path: 'recherche-par-date', title: 'recherche ', ab:'R'},
         // {path: 'liste-paiment', title: 'liste des paiement  ', ab:'L'}
@@ -172,6 +172,16 @@ export class SidebarComponent implements OnInit {
     isDcp() {
         this.hasAccess = false
         if (this.keycloak.getUserRoles().includes("dcp-admin")) {
+            this.hasAccess = true
+        }
+
+        return this.hasAccess
+
+
+    }
+    isCCB() {
+        this.hasAccess = false
+        if (this.keycloak.getUserRoles().includes("Ccb")) {
             this.hasAccess = true
         }
 

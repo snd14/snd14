@@ -1,247 +1,246 @@
 <div class="main-content">
-    <div class="container-fluid">
-  
-      <div class="row">
-        <div class="col-md-12">
-  
-          <!--la table -->
-  
-          <div class="card">
-            <div class="card-header card-header-rose card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">assignment</i>
-              </div>
-              <h4 class="card-title">Table des facteurs
-                <button mat-raised-button class="btn btn-raised  btn-info" style="float:right" data-toggle="modal"
-                  data-target="#myModal">
-                  ajouter facteur
-                </button>
-              </h4>
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <!--la table -->
+
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">assignment</i>
             </div>
-  
-            <div class="card-body">
-  
-              <div class="table-responsive" id ="mytable">
-  
-                <table class="table">
-  
-                  <thead style="background-color: whitesmoke;">
-  
-                    <tr>
-                      <th class="text-center"><b>Id</b> </th>
-                      <th class="text-center"><b>Nom</b></th>
-                      <th class="text-center"><b>Prenom</b></th>
-                      <th class="text-center"><b>TypeFacteur</b></th>
-                      <th class="text-center"><b>libelleStructure</b></th>
-                      <th class="text-center"><b>Active</b></th>
-                      <th class="text-right"><b>Action</b></th>
-                    </tr>
-                  </thead>
-  
-                  <tbody>
-                    <tr *ngFor="let fact of facteurs let factes of facte ">
-                      <td class="text-center">{{fact.id}}</td>
-                      <td class="text-center">{{fact.nom}}</td>
-                      <td class="text-center">{{fact.prenom}}</td>
-                      <td class="text-center">{{fact.libelle}}</td>
-                      <td class="text-center">{{fact.libelleStructure}}</td>
-                      <td class="text-center"><span class="badge badge-success" *ngIf="fact.active">Oui</span>
-                        <span class="badge badge-danger" *ngIf="!fact.active">Non</span>
-                      </td>
-                      <td class="td-actions text-right">
-  
-                        <button mat-raised-button type="button" class="btn btn-info ">
-                          <i class="material-icons" data-toggle="modal" data-target="#noticeModal"
-                            (click)="getfacteurbyId(factes.id)">edit</i>
-                        </button>
-                        <button mat-raised-button type="button" class="btn btn-danger ">
-                          <i class="fa fa-trash-o" (click)="showSwal(fact)"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <button mat-raised-button class="btn btn-raised  btn-info" style="float:right" (click)="upload()">telecharger</button>
-                </table>
-  
-                <!--modification de facteur-->
-                <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Modification de facteur</h4>
-                        <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                          <i class="material-icons">clear</i>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        
-  
-                          
-                            <form #userForme="ngForm">
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <mat-form-field class="example-full-width">
-  
-                                    <input matInput type="number" placeholder="numContrat" id="numero" name="numero"
-                                       disabled [(ngModel)]="facte.id">
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-12">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="nom" [(ngModel)]="facte.nom" id="nom"
-                                      name="nom" >
-                                  </mat-form-field>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput type="text" placeholder="prenom" [(ngModel)]="facte.prenom"
-                                      id="prenom" name="prenom" >
-                                  </mat-form-field>
-                                </div>
-                              </div>
-  
-  
-                              <div class="col-md-12">
-                                <div class="row">
-                                  
-                                    <mat-form-field>
-  
-                                      <mat-select placeholder="selectionner le type de Facteur" name="libelle"
-                                        [(ngModel)]="facte.libelle">
-                                        <mat-option *ngFor="let li of Libelle" value="{{li.libelle}}">{{li.libelle}}
-                                        </mat-option>
-  
-  
-                                      </mat-select>
-  
-                                    </mat-form-field>
-                                  
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="row">
-                                  
-                                    <mat-form-field>
-                                      <mat-select placeholder="selectionner le libelleStructure" name="libelleStructure" id="libelleStructure"
-                                        [(ngModel)]="facte.libelleStructure">
-                                        <mat-option *ngFor="let str of libelleStructure" value="{{str.id}}">{{str.libelle}}
-                                        </mat-option>
-                                      </mat-select>
-  
-                                    </mat-form-field>
-                                  
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="row">
-  
-                                    <div class="col-sm-2 checkbox-radios">
-                                      <div class="form-check">
-                                        <label class="form-check-label">
-                                          <input class="form-check-input" type="checkbox" id="active" name="active"
-                                            value="true" [(ngModel)]="facte.active"> Active
-                                          <span class="form-check-sign">
-                                            <span class="check"></span>
-                                          </span>
-                                        </label>
-                                      </div>
-                                    </div>
-                                  
-                                </div>
-                              </div>
-  
-  
-                            </form>
-                          
-                        
-                        <div class="modal-footer">
-                          <button mat-raised-button type="submit" class="btn btn-fill btn-success" data-dismiss="modal"
-                            [disabled]="userForme.invalid" (click)="update()">modifier</button>
-                        </div>
-  
-                      </div>
-  
+            <h4 class="card-title">Table des facteurs
+              <button mat-raised-button class="btn btn-raised  btn-info" style="float:right" data-toggle="modal"
+                data-target="#myModal" *ngIf="isDcp()">
+                ajouter facteur
+              </button>
+            </h4>
+          </div>
+
+          <div class="card-body">
+
+            <div class="table-responsive" id="mytable">
+
+              <table class="table">
+
+                <thead style="background-color: whitesmoke;">
+
+                  <tr>
+                   <!-- <th class="text-center"><b>Id</b> </th>-->
+                    <th class="text-center"><b>Nom</b></th>
+                    <th class="text-center"><b>Prenom</b></th>
+                    <th class="text-center"><b>TypeFacteur</b></th>
+                    <th class="text-center"><b>libelleStructure</b></th>
+                    <th class="text-center"><b>Active</b></th>
+                    <th class="text-right"><b>Action</b></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let fact of facteurs let factes of facte ">
+                   <!-- <td class="text-center">{{fact.id}}</td>-->
+                    <td class="text-center">{{fact.nom}}</td>
+                    <td class="text-center">{{fact.prenom}}</td>
+                    <td class="text-center">{{fact.libelle}}</td>
+                    <td class="text-center">{{fact.libelleStructure}}</td>
+                    <td class="text-center"><span class="badge badge-success" *ngIf="fact.active">Oui</span>
+                      <span class="badge badge-danger" *ngIf="!fact.active">Non</span>
+                    </td>
+                    <td class="td-actions text-right">
+
+                      <button mat-raised-button type="button" class="btn btn-info ">
+                        <i class="material-icons" data-toggle="modal" data-target="#noticeModal"
+                          (click)="getfacteurbyId(factes)">edit</i>
+                      </button>
+                     <!-- <button mat-raised-button type="button" class="btn btn-danger ">
+                        <i class="fa fa-trash-o" (click)="showSwal(fact)"></i>
+                      </button>-->
+                    </td>
+                  </tr>
+                </tbody>
+                <button mat-raised-button class="btn btn-raised  btn-info" style="float:right"
+                  (click)="upload()">telecharger</button>
+              </table>
+
+              <!--modification de facteur-->
+              <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Modification de facteur</h4>
+                      <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="material-icons">clear</i>
+                      </button>
                     </div>
+                    <div class="modal-body">
+
+
+
+                      <form #userForme="ngForm">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="example-full-width">
+
+                              <input matInput type="number" placeholder="numContrat" id="numero" name="numero" disabled
+                                [(ngModel)]="donnee.id">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-12">
+                            <mat-form-field class="example-full-width">
+                              <input matInput type="text" placeholder="nom" [(ngModel)]="donnee.nom" id="nom" name="nom">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <mat-form-field class="example-full-width">
+                              <input matInput type="text" placeholder="prenom" [(ngModel)]="donnee.prenom" id="prenom"
+                                name="prenom">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                          <div class="row">
+
+                            <mat-form-field>
+
+                              <mat-select placeholder="selectionner le type de Facteur" name="libelle"
+                                [(ngModel)]="donnee.libelle">
+                                <mat-option *ngFor="let li of Libelle" value="{{li.libelle}}">{{li.libelle}}
+                                </mat-option>
+
+
+                              </mat-select>
+
+                            </mat-form-field>
+
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="row">
+
+                            <mat-form-field>
+                              <mat-select placeholder="selectionner le libelleStructure" name="libelleStructure"
+                                id="libelleStructure" [(ngModel)]="dataa">
+                                <mat-option *ngFor="let str of libelleStructure" value="{{str.id}}">{{str.libelle}}
+                                </mat-option>
+                              </mat-select>
+
+                            </mat-form-field>
+
+                          </div>
+                        </div>
+                        <div class="col-md-12">
+                          <div class="row">
+
+                            <div class="col-sm-2 checkbox-radios">
+                              <div class="form-check">
+                                <label class="form-check-label">
+                                  <input class="form-check-input" type="checkbox" id="active" name="active" value="true"
+                                    [(ngModel)]="donnee.active"> Active
+                                  <span class="form-check-sign">
+                                    <span class="check"></span>
+                                  </span>
+                                </label>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+
+                      </form>
+
+
+                      <div class="modal-footer">
+                        <button mat-raised-button type="submit" class="btn btn-fill btn-success" data-dismiss="modal"
+                          [disabled]="userForme.invalid" (click)="update()">modifier</button>
+                      </div>
+
+                    </div>
+
                   </div>
                 </div>
-  
-                <!--end modification-->
-  
               </div>
-  
-  
+
+              <!--end modification-->
+
             </div>
-            <!-- ajout de facteur -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Ajout facteur?</h5>
-                    <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                      <i class="material-icons">close</i>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <!--formulaire-->
-                    <div class="row">
-                      <div class="col-sm-12 col-sm-offset-2">
-                        <form [formGroup]="facteurForm"  >
-                          
-                          <div class="form-group">
-                            <label for="nom">nom</label>
-                            <input type="text" id="nom"
-                                   class="form-control" formControlName="nom">
-                          </div>
-                          <div class="form-group">
-                            <label for="prenom">prenom</label>
-                            <input type="text" id="prenom"
-                                    class="form-control" formControlName="prenom">
-                          </div>
-                          <div class="form-group">
-                            <label for="libelle">type de Facteur</label>
-                            <mat-select type="text" id="libelle" class="form-control" formControlName="libelle">
-                              <mat-option *ngFor="let libe of Libelle" value="{{libe.libelle}}">{{libe.libelle}}
-                              </mat-option>
-                                    
-                            </mat-select>
-                          </div>
-                          <div class="form-group">
-                            <label for="libellestr">libelleStructure</label>
-                            <mat-select type="number"  id="libellestr" class="form-control" formControlName="libellestr">
-                              <mat-option *ngFor="let structure of libelleStructure" value="{{structure.id}}">{{structure.libelle}}
-                                
-                              </mat-option>
-                                    
-                            </mat-select>
-                          </div>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                                      <input class="form-check-input" type="checkbox" id="active" formControlName="active"
-                                        value="true">Active <span class="form-check-sign">
-                                          <span class="check"></span>
-                                        </span>
-                                      
-                                    </label>
-                          </div>
-                          
-                          
-                          
-                          
-                          
-                        </form>
-                        <div class="modal-footer">
-                          <button mat-raised-button type="submit" class="btn btn-fill btn-success" data-dismiss="modal"
-                          [disabled]="facteurForm.invalid" (click)="onSubmit()">Enregistrer
-                          </button>
-                          
+
+
+          </div>
+          <!-- ajout de facteur -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="myModalLabel">Ajout facteur?</h5>
+                  <button mat-button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="material-icons">close</i>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!--formulaire-->
+                  <div class="row">
+                    <div class="col-sm-12 col-sm-offset-2">
+                      <form [formGroup]="facteurForm">
+
+                        <div class="form-group">
+                          <label for="nom">nom</label>
+                          <input type="text" id="nom" class="form-control" formControlName="nom">
                         </div>
+                        <div class="form-group">
+                          <label for="prenom">prenom</label>
+                          <input type="text" id="prenom" class="form-control" formControlName="prenom">
+                        </div>
+                        <div class="form-group">
+                          <label for="libelle">type de Facteur</label>
+                          <mat-select type="text" id="libelle" class="form-control" formControlName="libelle">
+                            <mat-option *ngFor="let libe of Libelle" value="{{libe.libelle}}">{{libe.libelle}}
+                            </mat-option>
+
+                          </mat-select>
+                        </div>
+                        <div class="form-group">
+                          <label for="libellestr">libelleStructure</label>
+                          <mat-select type="number" id="libellestr" class="form-control" formControlName="libellestr">
+                            <mat-option *ngFor="let structure of libelleStructure" value="{{structure.id}}">
+                              {{structure.libelle}}
+
+                            </mat-option>
+
+                          </mat-select>
+                        </div>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="active" formControlName="active"
+                              value="true">Active <span class="form-check-sign">
+                              <span class="check"></span>
+                            </span>
+
+                          </label>
+                        </div>
+
+
+
+
+
+                      </form>
+                      <div class="modal-footer">
+                        <button mat-raised-button type="submit" class="btn btn-fill btn-success" data-dismiss="modal"
+                          [disabled]="facteurForm.invalid" (click)="onSubmit()">Enregistrer
+                        </button>
+
                       </div>
                     </div>
-                    <!--<div class="row">
+                  </div>
+                  <!--<div class="row">
                       <div class="col-sm-12 col-sm-offset-2">
   
                         <form [formGroup]="facteurForm" (ngSubmit)="onSubmit()">
@@ -297,23 +296,23 @@
                         </form>
                         </div>
                         </div>-->
-                  
-                      <!--end formulaire-->
-                    </div>
-                  </div>
+
+                  <!--end formulaire-->
                 </div>
               </div>
-              <!--end ajout-->
-  
-  
-  
-  
             </div>
           </div>
-  
-  
-  
-  
-  
+          <!--end ajout-->
+
+
+
+
         </div>
       </div>
+
+
+
+
+
+    </div>
+  </div>
