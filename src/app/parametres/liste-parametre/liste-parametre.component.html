@@ -42,11 +42,11 @@
                     <tr *ngFor="let param of parametres let parame of params ">
                      <!-- <td class="text-center">{{param.id}}</td>-->
                       <td class="text-center">{{param.libelle}}</td>
-                      <td class="text-center">{{param.montantHt}}</td>
-                      <td class="text-center">{{param.montantTtc}}</td>
-                      <td class="text-center">{{param.netAPayer}}</td>
-                      <td class="text-center">{{param.remise}}</td>
-                      <td class="text-center">{{param.tva}}</td>
+                      <td class="text-center">{{param.montantHt.toLocaleString()}}</td>
+                      <td class="text-center">{{param.montantTtc.toLocaleString()}}</td>
+                      <td class="text-center">{{param.netAPayer.toLocaleString()}}</td>
+                      <td class="text-center">{{param.remise.toLocaleString()}}</td>
+                      <td class="text-center">{{param.tva.toLocaleString()}}</td>
                       <td class="td-actions text-right">
                         <button mat-raised-button type="button" class="btn btn-info ">
                           <i class="material-icons" data-toggle="modal" data-target="#myModal"

@@ -28,7 +28,7 @@ export class RapportDuBureauComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.getlistepaiement();
+    //this.getlistepaiement();
   }
   getlistepaiement(){
     //console.log(this.idStructure)

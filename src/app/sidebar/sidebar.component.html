@@ -139,7 +139,7 @@
             </ul>
             <!--facteur-->
             
-            <ul class="nav" *ngIf="isDcp() || isDrp() || isCCB" >
+            <ul class="nav"  >
                 <li routerLinkActive="active" class="nav-item">
                   
                     <a [routerLink]="[menuItems[2].path]" *ngIf="menuItems[2].type === 'link'" class="nav-link">
@@ -157,18 +157,41 @@
         
                     
                     <div id="{{menuItems[2].collapse}}" class="collapse" *ngIf="menuItems[2].type === 'sub'">
-                        <ul class="nav">
-                            <li routerLinkActive="active" *ngFor="let childitem of menuItems[2].children" class="nav-item">
-                                <a [routerLink]="[menuItems[2].path, childitem.path]" class="nav-link">
+                        
+                        
         
-                                    <span class="sidebar-mini">{{childitem.ab}}</span>
-                                    <span class="sidebar-normal">{{childitem.title}}</span>
-        
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </div>
+                      
+                        <ul class="nav" *ngIf="isDcp() || isDrp() ||isCCB()">
+                             <li routerLinkActive="active" class="nav-item">
+                                 <a [routerLink]="[menuItems[2].path,menuItems[2].children[0].path]" class="nav-link">
+         
+         
+                                     <span class="sidebar-mini">{{menuItems[2].children[0].ab}}</span>
+                                     <span class="sidebar-normal">{{menuItems[2].children[0].title}}</span>
+                                     
+                                 </a>
+                             </li>
+                         </ul>
+ 
+                         <ul class="nav" *ngIf="isReceveur()">
+                             <li routerLinkActive="active" class="nav-item">
+                                 <a [routerLink]="[menuItems[2].path, menuItems[2].children[1].path]" class="nav-link">
+                                     <span class="sidebar-mini">{{menuItems[2].children[1].ab}}</span>
+                                     <span class="sidebar-normal">{{menuItems[2].children[1].title}}</span>
+         
+         
+                                    
+                                    
+         
+                                 </a>
+                             </li>
+                             
+                         </ul>
+ 
+                        
+                     
+ 
+                     </div>
                 </li>
         
             </ul>
@@ -228,39 +251,42 @@
                     
                     <div id="{{menuItems[4].collapse}}" class="collapse" *ngIf="menuItems[4].type === 'sub'">
                         
-                        <ul class="nav" *ngIf="isReceveur()">
-                            <li routerLinkActive="active" class="nav-item">
-                                <a [routerLink]="[menuItems[4].path, menuItems[4].children[0].path]" class="nav-link">
-        
-                                    <span class="sidebar-mini">{{menuItems[4].children[0].ab}}</span>
-                                    <span class="sidebar-normal">{{menuItems[4].children[0].title}}</span>
-        
-                                </a>
-                            </li>
-                        </ul>
+                        
         
                       
-                       <ul class="nav" *ngIf="isDcp() || isDrp() || isCCB">
+                       <ul class="nav" *ngIf="isReceveur()">
                             <li routerLinkActive="active" class="nav-item">
-                                <a [routerLink]="[menuItems[4].path, menuItems[4].children[1].path]" class="nav-link">
+                                <a [routerLink]="[menuItems[4].path,menuItems[4].children[1].path]" class="nav-link">
         
         
                                     <span class="sidebar-mini">{{menuItems[4].children[1].ab}}</span>
                                     <span class="sidebar-normal">{{menuItems[4].children[1].title}}</span>
-        
+                                    
                                 </a>
                             </li>
                         </ul>
-                       
-               
-        
-                        
-                         
-                    </div>
-                </li>
-                </ul>
 
-   </div>             
+                        <ul class="nav" *ngIf="isDcp() || isDrp() || isCCB()">
+                            <li routerLinkActive="active" class="nav-item">
+                                <a [routerLink]="[menuItems[4].path, menuItems[4].children[2].path]" class="nav-link">
+                                    <span class="sidebar-mini">{{menuItems[4].children[2].ab}}</span>
+                                    <span class="sidebar-normal">{{menuItems[4].children[2].title}}</span>
+        
+        
+                                   
+                                   
+        
+                                </a>
+                            </li>
+                            
+                        </ul>
+
+                       
+                    
+
+                    </div>
+                    </li>
+                    </ul>            
             <!--fin erapport-->
 <!--       
           <ul class="nav">

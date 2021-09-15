@@ -77,7 +77,8 @@ export const ROUTES: RouteInfo[] = [{
     icontype: 'book',
     collapse: 'rapport',
     children: [
-        { path: 'rapport-du-bureau', title: 'rapport du bureau', ab: 'A' },
+        { path: 'rapportdubureau', title: 'rapportdubureau', ab: 'A',role: 'drp-admin' },
+        { path: 'rapport-du-bureau', title: 'rapport du bureau', ab: 'A',role: 'drp-admin' },
         { path: 'rapport-par-bureau', title: 'rapport par bureau', ab: 'R', role: 'drp-admin' },
         // {path: 'recherche-par-date', title: 'recherche ', ab:'R'},
         // {path: 'liste-paiment', title: 'liste des paiement  ', ab:'L'}
@@ -181,7 +182,7 @@ export class SidebarComponent implements OnInit {
     }
     isCCB() {
         this.hasAccess = false
-        if (this.keycloak.getUserRoles().includes("Ccb")) {
+        if (this.keycloak.getUserRoles().includes("CCB")) {
             this.hasAccess = true
         }
 
